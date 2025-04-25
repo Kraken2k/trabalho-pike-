@@ -1,4 +1,3 @@
-
 import { Tabs } from 'expo-router'  
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -28,6 +27,7 @@ export default function TabLayout() {
         tabBarIcon: ({ size, color }) => <Ionicons name="home" size={size} color={color} />,
       }}
     />
+
     <Tabs.Screen
       name="bookmarks"
       options={{
@@ -35,11 +35,12 @@ export default function TabLayout() {
       }}
     />
     <Tabs.Screen
-      name="creat"
+      name="create"
       options={{
         tabBarIcon: ({ color, size }) => <Ionicons name="add-circle" size={size} color={color} />,
       }}
     />
+    
     <Tabs.Screen
       name="notifications"
       options={{
