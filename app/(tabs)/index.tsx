@@ -5,12 +5,12 @@
     import { useAuth } from "@clerk/clerk-expo";
     import { Ionicons } from "@expo/vector-icons";
     import { COLORS } from "constants/theme";
-    import Story from "componets/Story";
+    import Story from "components/Story";
     import { STORIES } from "constants/mock-data";
     import { useQuery } from "convex/react";
     import { api } from "convex/_generated/api";
-    import { Loader } from "componets/Loader";
-import Post from "componets/Posts";
+    import { Loader } from "components/Loader";
+import Post from "components/Posts";
 
     const NoPostsFound = () => {
       return (

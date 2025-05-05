@@ -1,5 +1,5 @@
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import InitialLayout from "componets/InitialLayout";
+import InitialLayout from "components/InitialLayout";
 import ClerkAndConvexProvider from "providers/ClerkAndConvexProvider";
 import { SplashScreen } from "expo-router";
 import { useFonts } from "expo-font";
