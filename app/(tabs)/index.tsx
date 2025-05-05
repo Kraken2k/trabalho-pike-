@@ -1,4 +1,4 @@
-    import { Image,Pressable, ScrollView, Text, TouchableOpacity, View,  } from "react-native";
+    import { FlatList, Image,Pressable, ScrollView, Text, TouchableOpacity, View,  } from "react-native";
     import {styles} from "../../styles/feed.styles";
     import React from "react";
     import { Link } from "expo-router";
@@ -45,30 +45,28 @@ import Post from "componets/Posts";
               <Ionicons name="log-out-outline" size={24} color= {COLORS.white}   />
             </TouchableOpacity>
           </View>
-
-          <ScrollView 
+        <FlatList
+          data={posts}
+          renderItem={({ item }) => <Post post={item} />}
+          keyExtractor={(item) => item._id}
           showsVerticalScrollIndicator={false}
-           contentContainerStyle={{paddingBottom: 60}}
-          >  
-
-            {/*STORIES*/}
-
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.storiesContainer}
-            >
-              {STORIES.map((story) => (
-                <Story key={story.id} story={story} />
-              ))}
-            </ScrollView>
-
-              {posts.map((post) => (
-                <Post key={post._id} post={post} />
-              ))}
-
-          </ScrollView>
+          contentContainerStyle={{ paddingBottom: 60 }}
+          ListHeaderComponent={<StoriesSection />}
+        />
         </View>
       );
     }
 
+const StoriesSection = () => {
+  return (
+    <ScrollView
+    horizontal
+    showsHorizontalScrollIndicator={false}
+    style={styles.storiesContainer}
+  >
+    {STORIES.map((story) => (
+      <Story key={story.id} story={story} />
+    ))}
+  </ScrollView>
+  );
+};
