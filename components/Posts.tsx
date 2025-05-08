@@ -116,7 +116,7 @@ export default function Post({ post }: PostProps) {
             {/*POSTS INFO*/}
             <View style={styles.postInfo}>
                 <Text style={styles.likesText}>
-                  {likesCount > 0 ? '${likesCount.toLocaleString()} likes' : "Be the first to like"}
+                  {likesCount > 0 ? `${likesCount.toLocaleString()} likes` : "Be the first to like"}
                 </Text>
                 {post.caption && (
                      <View style={styles.captionContainer}>
