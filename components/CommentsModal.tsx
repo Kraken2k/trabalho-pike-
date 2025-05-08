@@ -4,7 +4,7 @@ import { api } from "convex/_generated/api";
 import { Id } from "convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
 import { useState } from "react";
-import {View, Text, Modal, Platform, TouchableOpacity, KeyboardAvoidingView, FlatList } from "react-native";
+import {View, Text, Modal, Platform, TouchableOpacity, KeyboardAvoidingView, FlatList, TextInput } from "react-native";
 import { styles } from "styles/feed.styles";
 import { Loader } from "./Loader";
 import Comment from "./Comment";
@@ -23,8 +23,20 @@ export default function CommentsModal({onClose,onCommentAdded,postId,visible}: C
     const addComment = useMutation(api.comments.addComment);
     
     const handleAddComment = async () => {
+        if (!newComment.trim()) return;
 
-    }
+        try {
+            await addComment({
+                content: newComment,
+                postId,
+            });
+
+            setNewComment("");
+            onCommentAdded();
+        } catch (error) {
+            console.error("Error adding comment:", error);
+        }
+    };
 
     return (
         <Modal visible={visible} animationType="slide" transparent={true} onRequestClose={onClose}>
@@ -47,10 +59,29 @@ export default function CommentsModal({onClose,onCommentAdded,postId,visible}: C
                     <FlatList
                     data={comments}
                     keyExtractor={(item) => item._id}
-                    renderItem={({item}) => <Comment comment ={item} />}
+                    renderItem={({ item }) => <Comment comment={item} />}
                     contentContainerStyle={styles.commentsList}
                     />
                 )}
+
+                <View style={styles.commentInput}>
+                    <TextInput
+                    style={styles.input}
+                    placeholder="Add a comment..."
+                    placeholderTextColor={COLORS.grey}
+                    value={newComment}
+                   onChangeText={setNewComment}
+                   multiline
+                   />
+
+                    <TouchableOpacity onPress={handleAddComment} disabled ={!newComment.trim()}>
+                        <Text style={[styles.postButton, !newComment.trim() && styles.postButtonDisabled]}>
+                        Post
+                        </Text>
+                     </TouchableOpacity>   
+
+
+                </View>
             </KeyboardAvoidingView>
         </Modal>
     );
