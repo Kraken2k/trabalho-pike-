@@ -1,16 +1,14 @@
-    import { FlatList, Image,Pressable, ScrollView, Text, TouchableOpacity, View,  } from "react-native";
+    import { FlatList, Text, TouchableOpacity, View,  } from "react-native";
     import {styles} from "../../styles/feed.styles";
     import React from "react";
-    import { Link } from "expo-router";
     import { useAuth } from "@clerk/clerk-expo";
     import { Ionicons } from "@expo/vector-icons";
     import { COLORS } from "constants/theme";
-    import Story from "components/Story";
-    import { STORIES } from "constants/mock-data";
     import { useQuery } from "convex/react";
     import { api } from "convex/_generated/api";
     import { Loader } from "components/Loader";
 import Post from "components/Posts";
+import StoriesSection from "components/Stories";
 
     const NoPostsFound = () => {
       return (
@@ -56,17 +54,3 @@ import Post from "components/Posts";
         </View>
       );
     }
-
-const StoriesSection = () => {
-  return (
-    <ScrollView
-    horizontal
-    showsHorizontalScrollIndicator={false}
-    style={styles.storiesContainer}
-  >
-    {STORIES.map((story) => (
-      <Story key={story.id} story={story} />
-    ))}
-  </ScrollView>
-  );
-};
