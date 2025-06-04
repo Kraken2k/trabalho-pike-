@@ -10,7 +10,7 @@ export default function Notification({ notification }: any) {
   return (
     <View style={styles.notificationItem}>
       <View style={styles.notificationContent}>
-        <Link href={`/notifications`} asChild>
+        <Link href={`/users/${notification.sender._id}`} asChild> {/*CAMINHO DO ARQUIVO FDP*/}
           <TouchableOpacity style={styles.avatarContainer}>
             <Image
               source={notification.sender.image}
@@ -31,7 +31,6 @@ export default function Notification({ notification }: any) {
         </Link>
 
         <View style={styles.notificationInfo}>
-          {/* todo: fix later */}
           <Link href={`/notifications`} asChild>
             <TouchableOpacity>
               <Text style={styles.username}>{notification.sender.username}</Text>
@@ -62,3 +61,4 @@ export default function Notification({ notification }: any) {
     </View>
   );
 }
+
